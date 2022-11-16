@@ -53,19 +53,19 @@ public class RotarySpoonController : ControllerBase
         return Ok(todoItemId);
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Update([FromBody] UpdateTodoListRequest request)
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateTodoListRequest request)
     {
-        var status = TodoItemsRepository.Update(request.Id, request.Text);
+        var status = TodoItemsRepository.Update(id, request.Text);
         return Ok(status);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Close([FromBody] CloseTodoListRequest request)
+    public async Task<IActionResult> Close(Guid id)
     {
-        var status = TodoItemsRepository.Close(request.Id);
+        var status = TodoItemsRepository.Close(id);
         return Ok(status);
     }
 
